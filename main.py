@@ -30,6 +30,11 @@ def main():
     pygame.font.init()
     font = pygame.font.Font(None, 36)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    background_image = pygame.image.load("assets/background.png").convert() 
+    background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
     game = Game(screen, font)
     clock = pygame.time.Clock()
     dt = 0
@@ -41,7 +46,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
     
-        screen.fill("black")
+        screen.blit(background_image, (0, 0))
         for thing in updatable:
             thing.update(dt)
         

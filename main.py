@@ -6,6 +6,7 @@ from src.game.constants import *
 from src.game.game import Game
 from src.entities.player import Player
 from src.entities.shot import Shot
+from src.entities.explosion import Explosion
 
 def initialize_game():
     """Initialize/reset all game objects and sprite groups"""
@@ -13,6 +14,7 @@ def initialize_game():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    explosions = pygame.sprite.Group()
     
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
@@ -20,10 +22,12 @@ def initialize_game():
     Shot.containers = (shots, updatable, drawable)
     Game.containers = (updatable, drawable)
     
+    Explosion.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
     
-    return updatable, drawable, asteroids, shots, player, asteroid_field
+    return updatable, drawable, asteroids, shots, explosions, player, asteroid_field
 
 def main():
     pygame.init()
@@ -39,7 +43,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
-    updatable, drawable, asteroids, shots, player, asteroid_field = initialize_game()
+    updatable, drawable, asteroids, shots, explosions, player, asteroid_field = initialize_game()
 
     while True:
         for event in pygame.event.get():
@@ -80,6 +84,9 @@ def main():
 
             for shot in shots:
                 if asteroid.collide(shot):
+                    explosion = Explosion(asteroid.rect.centerx, asteroid.rect.centery)
+                    updatable.add(explosion)
+                    explosions.add(explosion)
                     asteroid.split()
                     shot.kill()
                     game.update_score(5)
@@ -87,6 +94,9 @@ def main():
 
         for thing in drawable:
             thing.draw(screen)
+
+        for explosion in explosions:
+            explosion.draw(screen)
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000

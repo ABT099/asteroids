@@ -1,11 +1,11 @@
 import sys
 import pygame
-from asteroid import Asteroid
-from asteroidfield import AsteroidField
-from constants import *
-from game import Game
-from player import Player
-from shot import Shot
+from src.entities.asteroid import Asteroid
+from src.entities.asteroidfield import AsteroidField
+from src.game.constants import *
+from src.game.game import Game
+from src.entities.player import Player
+from src.entities.shot import Shot
 
 def initialize_game():
     """Initialize/reset all game objects and sprite groups"""

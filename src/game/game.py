@@ -1,4 +1,4 @@
-from constants import MARGIN, SCREEN_WIDTH
+from src.game.constants import MARGIN, SCREEN_WIDTH
 
 
 class Game:

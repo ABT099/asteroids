@@ -17,7 +17,7 @@ Inspired by the classic Atari Asteroids game
 
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/ABT099/asteroids.git
    cd asteroids
    ```
 

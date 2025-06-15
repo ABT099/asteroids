@@ -1,5 +1,5 @@
 import pygame
-from circleshape import CircleShape
+from src.entities.circleshape import CircleShape
 from src.game.constants import SHOT_RADIUS
 
 
